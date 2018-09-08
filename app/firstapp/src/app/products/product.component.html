@@ -14,8 +14,10 @@
         <div class="row">
             <div class="col-md-6">
                 <h3>Filtered By:{{filterProduct}}</h3>
+                <h3>Number of product filter On Search:{{(products | mySearch:filterProduct)?.length}}</h3>
             </div>
         </div>
+
         <div class="table-responsive" >  
             <table class="table" *ngIf="products && products.length">
                 <thead>
@@ -33,19 +35,21 @@
                         <th>Star Rating</th>
                     </tr>
                 </thead>
-                {{showImage}}
+               
                 <tbody>
                     <tr *ngFor="let product of products | mySearch:filterProduct">
                         <td>
-                            <img [src]="product.imageUrl" *ngIf="showImage"/>
+                            <img [src]="product.imageUrl" *ngIf="showImage" [style.width.px]="imageWidth"/>
                         </td>
-                        <td>{{product.productName | myUpper:"Upper"}}</td>
+                        <td style="color:blue">{{product.productName | myUpper:"Upper"}}</td>
                         <td>{{product.productCode | myUpper:"Lower"}}</td>
                         <td>{{product.releaseDate}}</td>
-                        <td>{{product.price | addValue | currency:"GBP"}}</td>
-                        <td>{{product.starRating}}</td>
+                        <td [ngStyle]="{'background-color':product.price<30?'green':'red'}">{{product.price | addValue | currency:"GBP"}}</td>
+                        <td><app-star [rating]="product.starRating"
+                            (ratingClicked)="onDataRecieve($event)"></app-star></td>
                     </tr>
                 </tbody>
+               
             </table>
         </div>
     </div>
