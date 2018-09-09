@@ -3,7 +3,6 @@ import { IProduct } from './product.model';
 import { ProductService } from './prodduct.service';
 
 @Component({
-    selector: 'app-prod',
     templateUrl: './product.component.html',
     // styles: ['thead{color:red}', 'h3{color:olive}']
     styleUrls: ['./product.component.css']
@@ -27,14 +26,18 @@ export class ProductComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.products = this._productService.getProducts();
+        this._productService.getProducts()
+            .subscribe((data) => this.products  = data);
     }
 }
 
 
 
 /*
-
+ngOnInit(): void {
+        this._productService.getProducts()
+            .then((data) => this.products  = data);
+    }
 One way binding
 --Data Binding{{}}
 --Property Binding[]

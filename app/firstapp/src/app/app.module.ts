@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { DashComponent } from './dashboard.component';
@@ -10,6 +13,10 @@ import { AddValue } from './products/addValue.pipe';
 import { ProductFilter } from './products/productFilter.pipe';
 import { StarComponent } from './shared/star.component';
 import { ProductService } from './products/prodduct.service';
+import { NotFoundComponent } from './shared/notFound.component';
+import { OrderComponent } from './orders/order.component';
+import { HomeComponent } from './home/home.component';
+import { ProductDetailComponent } from './products/productDetail.component';
 
 
 
@@ -17,7 +24,17 @@ import { ProductService } from './products/prodduct.service';
     // contain all the module
     imports: [
         BrowserModule,
-        FormsModule
+        FormsModule,
+        HttpModule,
+        HttpClientModule,
+        RouterModule.forRoot([
+            {path: 'products', component: ProductComponent},
+            {path: 'products/:id', component: ProductDetailComponent},
+            {path: 'orders', component: OrderComponent},
+            {path: 'home', component: HomeComponent},
+            {path: '', redirectTo: 'home', pathMatch: 'full'},
+            {path: '**', component: NotFoundComponent},
+        ])
     ],
     // All the component & pipe
     declarations: [
@@ -27,7 +44,11 @@ import { ProductService } from './products/prodduct.service';
         MyUpperPipe,
         AddValue,
         ProductFilter,
-        StarComponent
+        StarComponent,
+        NotFoundComponent,
+        OrderComponent,
+        HomeComponent,
+        ProductDetailComponent
     ],
     // Only first/Main component
     bootstrap: [
