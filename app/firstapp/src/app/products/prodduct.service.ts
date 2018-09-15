@@ -21,6 +21,11 @@ export class ProductService {
     getProducts(): Observable<IProduct[]> {
         return this.__http.get<IProduct[]>(this._productUrl);
     }
+
+    getProductDetails(id): Observable<IProduct[]> {
+        console.log('>>>>>id' + id);
+        return this.__http.get<IProduct[]>(`${this._productUrl}?productId=${id}` );
+    }
 }
 
   // http Client
@@ -59,4 +64,10 @@ httpclient
 
 observable=> Stream Line        <== Subscribe
 promisses==> Wait for final response
+
+
+var a =20
+
+var b = "my age is "+a;
+var b = `my age is ${a}`
 */

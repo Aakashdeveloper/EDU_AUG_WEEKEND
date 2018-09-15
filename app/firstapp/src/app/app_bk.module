@@ -6,9 +6,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { DashComponent } from './dashboard.component';
+import { ProductComponent } from './products/product.component';
+import { MyUpperPipe } from './products/myUpper.pipe';
+import { AddValue } from './products/addValue.pipe';
+import { ProductFilter } from './products/productFilter.pipe';
+import { StarComponent } from './shared/star.component';
+import { ProductService } from './products/prodduct.service';
 import { NotFoundComponent } from './shared/notFound.component';
 import { OrderComponent } from './orders/order.component';
 import { HomeComponent } from './home/home.component';
+import { ProductDetailComponent } from './products/productDetail.component';
 import { ProductModule } from './products/product.module';
 
 
@@ -21,6 +29,8 @@ import { ProductModule } from './products/product.module';
         HttpModule,
         HttpClientModule,
         RouterModule.forRoot([
+            {path: 'products', component: ProductComponent},
+            {path: 'products/:id', component: ProductDetailComponent},
             {path: 'orders', component: OrderComponent},
             {path: 'home', component: HomeComponent},
             {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -31,16 +41,25 @@ import { ProductModule } from './products/product.module';
     // All the component & pipe
     declarations: [
         AppComponent,
+        DashComponent,
+        ProductComponent,
+        MyUpperPipe,
+        AddValue,
+        ProductFilter,
+        StarComponent,
         NotFoundComponent,
         OrderComponent,
-        HomeComponent
+        HomeComponent,
+        ProductDetailComponent
     ],
     // Only first/Main component
     bootstrap: [
         AppComponent
     ],
     // All Services are declare here
-    providers: []
+    providers: [
+        ProductService
+    ]
 })
 
 export class AppModule {

@@ -3,6 +3,12 @@
             Product Detail Page
         </div>
         <div class="panel-body">
-            This is Product Detail Page
+            This is Product Detail Page for id {{id}}
+            <h1>{{detail.productName}}</h1>
+            <img [src]="detail[0].imageUrl" />
+            <h2>{{detail[0].description}}</h2>
+            <button class="btn btn-danger" (click)="onBack()">
+                <<<<Back
+            </button>
         </div>
     </div>
